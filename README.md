@@ -173,7 +173,14 @@ The pipeline runs automatically at **7:00 AM IST** every day via APScheduler (ru
 1. Push `backend/` to a GitHub repo
 2. Create a **Web Service** on Render, set build command: `pip install -r requirements.txt`
 3. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-4. Add all env vars in Render dashboard
+4. Add all env vars in Render dashboard. Set `MONGODB_URI` to the connection
+   string copied from **MongoDB Atlas → Connect → Drivers**; do not reuse an
+   old `cluster0` hostname. If Render reports `DNS query name does not exist`,
+   that Atlas deployment was renamed or deleted and the value must be replaced
+   in Render—an application redeploy cannot repair a non-existent DNS record.
+5. URL-encode special characters in the MongoDB username/password, and allow
+   network access from Render in Atlas. Rotate the database password if it was
+   ever written to deployment logs.
 
 ### Frontend → Vercel
 1. Push `frontend/` to GitHub

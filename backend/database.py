@@ -2,6 +2,7 @@
 MongoDB async connection using Motor.
 """
 from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo.errors import ConfigurationError
 from config import settings
 from core.logger import get_logger
 
@@ -43,7 +44,12 @@ async def connect_db():
     """Initialize MongoDB connection."""
     global _client, _db
     try:
-        _client = AsyncIOMotorClient(settings.mongodb_uri)
+        _client = AsyncIOMotorClient(
+            settings.mongodb_uri,
+            # Fail quickly on a bad or unreachable deployment instead of
+            # leaving the service in a long startup loop.
+            serverSelectionTimeoutMS=10_000,
+        )
 
         # Parse DB name safely
         uri_path = settings.mongodb_uri.split("/")
@@ -101,9 +107,23 @@ async def connect_db():
 
         logger.info("✅ All indexes ready")
 
-    except Exception as e:
-        logger.exception("MongoDB connection failed")
-        raise
+    except ConfigurationError:
+        _client = None
+        _db = None
+        logger.error(
+            "MongoDB URI configuration failed. Verify that MONGODB_URI uses "
+            "the current Atlas connection string and that its SRV hostname exists."
+        )
+        raise RuntimeError(
+            "MongoDB configuration failed. Check the MONGODB_URI environment variable."
+        ) from None
+    except Exception:
+        _client = None
+        _db = None
+        # Do not log a traceback here: database driver exceptions may include
+        # the connection URI, whose credentials must not reach Render logs.
+        logger.error("MongoDB connection failed; check database availability and MONGODB_URI.")
+        raise RuntimeError("MongoDB connection failed.") from None
 
 
 async def close_db():

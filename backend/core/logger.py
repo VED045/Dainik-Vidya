@@ -12,6 +12,10 @@ logger.add(
            "<cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - "
            "<level>{message}</level>",
     level="INFO",
+    # A database URI can contain credentials.  Never include local variables
+    # from an exception traceback in production logs.
+    backtrace=False,
+    diagnose=False,
 )
 
 # Optional: file logging
@@ -21,6 +25,8 @@ logger.add(
     retention="7 days",
     compression="zip",
     level="INFO",
+    backtrace=False,
+    diagnose=False,
 )
 
 def get_logger():
