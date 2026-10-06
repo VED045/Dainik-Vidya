@@ -6,8 +6,8 @@ import {
 
 // ─── Category Bar Chart ──────────────────────────────────────
 const BAR_COLORS = [
-  '#6366f1', '#8b5cf6', '#06b6d4', '#10b981',
-  '#f59e0b', '#ef4444', '#ec4899', '#14b8a6',
+  '#956b38', '#61715b', '#b3956b', '#9c6047',
+  '#7e7261', '#6f7156', '#bb8a70', '#a08860',
 ]
 
 export function CategoryBarChart({ data }) {
@@ -27,26 +27,26 @@ export function CategoryBarChart({ data }) {
       <BarChart data={chartData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
         <XAxis
           dataKey="name"
-          tick={{ fill: '#64748b', fontSize: 12 }}
+          tick={{ fill: 'var(--muted)', fontSize: 12 }}
           axisLine={false}
           tickLine={false}
         />
         <YAxis
-          tick={{ fill: '#64748b', fontSize: 12 }}
+          tick={{ fill: 'var(--muted)', fontSize: 12 }}
           axisLine={false}
           tickLine={false}
         />
         <Tooltip
           contentStyle={{
-            background: '#1e293b',
-            border: '1px solid rgba(99,102,241,0.2)',
-            borderRadius: '10px',
-            color: '#f1f5f9',
+            background: 'var(--raised)',
+            border: '1px solid var(--rule)',
+            borderRadius: '3px',
+            color: 'var(--ink)',
             fontSize: '13px',
           }}
-          cursor={{ fill: 'rgba(99,102,241,0.08)' }}
+          cursor={{ fill: 'var(--wash)' }}
         />
-        <Bar dataKey="count" radius={[6, 6, 0, 0]}>
+        <Bar dataKey="count" radius={[2, 2, 0, 0]}>
           {chartData.map((_, i) => (
             <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
           ))}
@@ -69,7 +69,7 @@ export function KeywordCloud({ keywords, onKeywordClick }) {
     <div className="flex flex-wrap gap-2 items-center">
       {keywords.slice(0, 20).map(({ word, count }) => {
         const size = 11 + Math.round((count / max) * 10)
-        const opacity = 0.4 + (count / max) * 0.6
+        const opacity = 0.7 + (count / max) * 0.3
         return (
           <button
             key={word}
@@ -90,12 +90,12 @@ export function KeywordCloud({ keywords, onKeywordClick }) {
 
 
 // ─── Mini stat bar ────────────────────────────────────────────
-export function StatBar({ label, value, max, color = '#6366f1' }) {
+export function StatBar({ label, value, max, color = 'var(--accent)' }) {
   const pct = max ? Math.round((value / max) * 100) : 0
   return (
     <div className="flex items-center gap-3">
-      <span className="text-slate-400 text-xs w-24 shrink-0 capitalize">{label}</span>
-      <div className="flex-1 h-2 bg-slate-800 rounded-full overflow-hidden">
+      <span className="text-slate-500 text-xs w-20 shrink-0 capitalize">{label}</span>
+      <div className="flex-1 h-1.5 rounded-sm overflow-hidden" style={{ background: 'var(--wash)' }}>
         <div
           className="h-full rounded-full transition-all duration-700"
           style={{ width: `${pct}%`, background: color }}

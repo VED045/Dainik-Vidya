@@ -76,6 +76,8 @@ export default function Signup() {
             placeholder="Full Name"
             required
             id="signup-name"
+            aria-label="Full name"
+            autoComplete="name"
             className={inputClass}
           />
           <input
@@ -85,6 +87,8 @@ export default function Signup() {
             placeholder="Email"
             required
             id="signup-email"
+            aria-label="Email"
+            autoComplete="email"
             className={inputClass}
           />
           <div className="relative">
@@ -95,6 +99,8 @@ export default function Signup() {
               placeholder="Password"
               required
               id="signup-password"
+              aria-label="Password"
+              autoComplete="new-password"
               className={inputClass}
             />
             <button

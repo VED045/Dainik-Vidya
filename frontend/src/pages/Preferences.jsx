@@ -138,7 +138,7 @@ export default function Preferences() {
           {/* Top N selector */}
           <div className={cardClass}>
             <h2 className={`font-semibold text-sm mb-4 ${dark ? 'text-slate-200' : 'text-slate-700'}`}>
-              🏆 Top N Articles on Dashboard
+              Top Stories in Your Journal
             </h2>
             <p className={`text-xs mb-4 ${dark ? 'text-slate-500' : 'text-slate-400'}`}>
               Choose how many top stories to show on the dashboard.
@@ -183,7 +183,7 @@ export default function Preferences() {
                         : 'bg-slate-50 text-slate-500 border-slate-200 hover:border-primary-300 hover:text-primary-600'
                     }`}
                 >
-                  {lang.emoji} {lang.label}
+                  {lang.label}
                 </button>
               ))}
             </div>
@@ -192,7 +192,7 @@ export default function Preferences() {
           {/* Topic selection */}
           <div className={cardClass}>
             <h2 className={`font-semibold text-sm mb-2 ${dark ? 'text-slate-200' : 'text-slate-700'}`}>
-              🎯 Preferred Topics
+              Preferred Topics
             </h2>
             <p className={`text-xs mb-4 ${dark ? 'text-slate-500' : 'text-slate-400'}`}>
               Click to select topics. Use arrows to reorder your priorities (first = highest priority).
@@ -214,7 +214,7 @@ export default function Preferences() {
                           : 'bg-white text-slate-500 border-slate-200 hover:border-primary-300 hover:text-primary-600 shadow-sm'
                       }`}
                   >
-                    <span>{t.emoji}</span>
+                    <span aria-hidden="true" className="text-primary-400">◇</span>
                     {t.label}
                     {isSelected && <CheckCircle size={14} className="ml-0.5" />}
                   </button>
@@ -226,7 +226,7 @@ export default function Preferences() {
             {selectedTopics.length > 0 && (
               <div>
                 <h3 className={`text-xs font-semibold mb-3 uppercase tracking-wide ${dark ? 'text-slate-500' : 'text-slate-400'}`}>
-                  Priority Order (drag to reorder)
+                  Priority Order (use arrows to reorder)
                 </h3>
                 <div className="flex flex-col gap-1.5">
                   {selectedTopics.map((topicId, idx) => {
@@ -239,7 +239,7 @@ export default function Preferences() {
                         <span className={`text-xs font-bold w-5 text-center ${dark ? 'text-primary-400' : 'text-primary-500'}`}>
                           {idx + 1}
                         </span>
-                        <span className="text-sm">{t.emoji}</span>
+                        <span className="text-sm text-primary-400" aria-hidden="true">◇</span>
                         <span className={`text-sm font-medium flex-1 ${dark ? 'text-slate-200' : 'text-slate-700'}`}>
                           {t.label}
                         </span>
@@ -247,6 +247,7 @@ export default function Preferences() {
                           <button
                             onClick={() => moveTopic(idx, -1)}
                             disabled={idx === 0}
+                            aria-label={`Move ${t.label} up`}
                             className={`p-1 rounded-md transition-colors disabled:opacity-20 ${
                               dark ? 'hover:bg-slate-700 text-slate-400' : 'hover:bg-slate-200 text-slate-500'
                             }`}
@@ -256,6 +257,7 @@ export default function Preferences() {
                           <button
                             onClick={() => moveTopic(idx, 1)}
                             disabled={idx === selectedTopics.length - 1}
+                            aria-label={`Move ${t.label} down`}
                             className={`p-1 rounded-md transition-colors disabled:opacity-20 ${
                               dark ? 'hover:bg-slate-700 text-slate-400' : 'hover:bg-slate-200 text-slate-500'
                             }`}

@@ -143,7 +143,7 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
     : 'bg-white rounded-2xl p-5 flex flex-col gap-3 border border-slate-200 hover:border-primary-300 hover:shadow-lg hover:shadow-primary-500/8 transition-all duration-300 animate-fade-in group'
 
   return (
-    <article className={cardBase}>
+    <article className={`news-story ${cardBase}`}>
 
       {/* Header row: category + source type + time + bookmark */}
       <div className="flex items-start justify-between gap-3">
@@ -175,6 +175,7 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
             onClick={toggleBookmark}
             className={`p-1.5 rounded-lg transition-colors ml-1 ${dark ? 'hover:bg-slate-800' : 'hover:bg-slate-100'}`}
             title={!auth ? 'Log in to bookmark' : bookmarked ? 'Remove bookmark' : 'Bookmark this article'}
+            aria-label={!auth ? 'Log in to bookmark' : bookmarked ? 'Remove bookmark' : 'Bookmark this article'}
           >
             {bookmarked
               ? <BookmarkCheck size={16} className="text-primary-500" />

@@ -183,10 +183,10 @@ export default function Subscribe() {
         <h3 className={`font-semibold text-sm mb-4 ${dark ? 'text-slate-300' : 'text-slate-700'}`}>What's in each digest?</h3>
         <ul className={`flex flex-col gap-2.5 text-sm ${dark ? 'text-slate-400' : 'text-slate-500'}`}>
           {[
-            '🔥 Top AI-curated stories of the day with importance reasons',
-            '📋 5–10 additional headlines from all sources',
-            '📊 Trending topics and most-covered category',
-            '🔗 Direct links to full articles',
+            'Top AI-curated stories of the day with importance reasons',
+            '5–10 additional headlines from all sources',
+            'Trending topics and most-covered category',
+            'Direct links to full articles',
           ].map(item => (
             <li key={item} className="flex items-start gap-2">{item}</li>
           ))}

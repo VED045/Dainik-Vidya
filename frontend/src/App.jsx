@@ -32,7 +32,7 @@ export const APP_NAME = 'Dainik-Vidya'
 export const APP_TAGLINE = 'AI-Powered News Intelligence'
 
 export default function App() {
-  const [dark, setDark] = useState(() => localStorage.getItem('dv-theme') !== 'light')
+  const [dark, setDark] = useState(() => localStorage.getItem('dv-theme') === 'dark')
   const [auth, setAuth] = useState(() => {
     try {
       const saved = localStorage.getItem('user')
@@ -74,12 +74,10 @@ export default function App() {
             dateFilter, setDateFilter, specificDay, setSpecificDay,
             sourceFilter, setSourceFilter, category, setCategory
           }}>
-          <div className={`min-h-screen transition-colors duration-300 ${
-          dark ? 'bg-slate-950 text-slate-100' : 'bg-[#F8FAFC] text-[#1F2937]'
-        }`}>
+          <div className="site-shell min-h-screen transition-colors duration-300">
           <Router>
             <Navbar />
-            <main className="pt-16 min-h-screen">
+            <main id="main-content" className="journal-main">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/news" element={<NewsFeed />} />
@@ -97,10 +95,10 @@ export default function App() {
             position="bottom-right"
             toastOptions={{
               style: {
-                background: dark ? '#1e293b' : '#ffffff',
-                color: dark ? '#f1f5f9' : '#1F2937',
-                border: `1px solid ${dark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.15)'}`,
-                borderRadius: '12px',
+                background: 'var(--paper)',
+                color: 'var(--ink)',
+                border: '1px solid var(--rule)',
+                borderRadius: '4px',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
               },
             }}
@@ -114,15 +112,12 @@ export default function App() {
 }
 
 function Footer() {
-  const { dark } = useTheme()
   return (
-    <footer className={`border-t py-6 mt-8 ${dark ? 'border-slate-800 text-slate-600' : 'border-slate-200 text-slate-400'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-        <span>
-          <strong className="text-primary-500">Dainik-Vidya</strong> — AI-Powered News Intelligence
-        </span>
-        <span>Sources: BBC · Reuters · NYT · 1stPost · Aaj Tak · Dainik Bhaskar · Lokmat · Sakal · Eenadu · Sakshi</span>
-      </div>
+    <footer className="journal-footer">
+      <div className="footer-brand">DAINIK VIDYA <span lang="hi">दैनिक विद्या</span></div>
+      <p>Many voices. A considered perspective.</p>
+      <div className="footer-sources">BBC · Reuters · The Hindu · Aaj Tak · Dainik Bhaskar · Lokmat · Sakal · Eenadu · Sakshi</div>
+      <div className="footer-colophon"><span>AI-powered news intelligence</span><span>Curated daily. Read thoughtfully.</span></div>
     </footer>
   )
 }

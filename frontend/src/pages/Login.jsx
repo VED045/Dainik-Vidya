@@ -76,6 +76,8 @@ export default function Login() {
             placeholder="Email"
             required
             id="login-email"
+            aria-label="Email"
+            autoComplete="email"
             className={inputClass}
           />
           <div className="relative">
@@ -86,6 +88,8 @@ export default function Login() {
               placeholder="Password"
               required
               id="login-password"
+              aria-label="Password"
+              autoComplete="current-password"
               className={inputClass}
             />
             <button

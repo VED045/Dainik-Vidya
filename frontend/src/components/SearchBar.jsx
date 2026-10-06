@@ -38,11 +38,12 @@ export default function SearchBar({ onSearch, placeholder = 'Search news...' }) 
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder={placeholder}
+          aria-label="Search news"
           className="input pl-10 pr-20"
         />
         <div className="absolute right-3 flex items-center gap-2">
           {value && (
-            <button type="button" onClick={handleClear} className="text-slate-500 hover:text-slate-300 transition-colors">
+            <button type="button" onClick={handleClear} aria-label="Clear search" className="text-slate-500 hover:text-slate-300 transition-colors">
               <X size={15} />
             </button>
           )}
