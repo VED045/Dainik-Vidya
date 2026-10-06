@@ -69,18 +69,17 @@ export function KeywordCloud({ keywords, onKeywordClick }) {
     <div className="flex flex-wrap gap-2 items-center">
       {keywords.slice(0, 20).map(({ word, count }) => {
         const size = 11 + Math.round((count / max) * 10)
-        const opacity = 0.7 + (count / max) * 0.3
         return (
           <button
             key={word}
             onClick={() => onKeywordClick?.(word)}
-            style={{ fontSize: size, opacity }}
-            className="px-3 py-1 rounded-full bg-primary-500/10 text-primary-300 border border-primary-500/20
+            style={{ fontSize: size }}
+            className="keyword-control px-3 py-1 rounded-full bg-primary-500/10 text-primary-300 border border-primary-500/20
               hover:bg-primary-500/25 hover:opacity-100 transition-all cursor-pointer active:scale-95"
             title={`Filter news by "${word}" (${count} mentions)`}
           >
             {word}
-            <span className="ml-1 text-primary-500/60 text-[10px]">{count}</span>
+            <span className="ml-1 text-[11px]">{count}</span>
           </button>
         )
       })}

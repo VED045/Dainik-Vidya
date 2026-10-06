@@ -210,7 +210,7 @@ export default function NewsFeed() {
         </h1>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <SearchBar onSearch={handleSearch} placeholder="Search articles… (press /)" />
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             {!isSearchMode && (
               <button onClick={() => { setArticles([]); setPage(1); setHasMore(true) }} className="btn-ghost text-xs shrink-0">
                 <RefreshCw size={14} /> Refresh
@@ -358,7 +358,7 @@ export default function NewsFeed() {
       )}
 
       {/* Articles grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading && !articles.length
           ? [...Array(PAGE_SIZE)].map((_, i) => <CardSkeleton key={i} />)
           : articles.slice(0, PAGE_SIZE * page).map((article, i) => (

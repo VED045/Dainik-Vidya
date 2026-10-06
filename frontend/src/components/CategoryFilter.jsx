@@ -27,7 +27,7 @@ export default function CategoryFilter({ active, onChange, counts }) {
     : CATEGORIES
 
   return (
-    <div className="flex items-center gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
+    <div className="category-tabs flex items-center gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
       {visibleCategories.map(cat => {
         const isActive = active === cat.id
         const count = counts?.[cat.id]
@@ -35,6 +35,7 @@ export default function CategoryFilter({ active, onChange, counts }) {
           <button
             key={cat.id}
             onClick={() => onChange(cat.id)}
+            aria-pressed={isActive}
             className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200
               ${isActive
                 ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25'
@@ -45,7 +46,7 @@ export default function CategoryFilter({ active, onChange, counts }) {
           >
             {cat.label}
             {count !== undefined && cat.id !== 'all' && (
-              <span className={`ml-1.5 text-xs ${isActive ? 'opacity-80' : 'opacity-50'}`}>
+              <span className="ml-1.5 text-xs">
                 {count}
               </span>
             )}

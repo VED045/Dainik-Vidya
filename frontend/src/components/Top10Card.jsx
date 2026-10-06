@@ -7,7 +7,7 @@ export default function Top10Card({ item, featured = false }) {
     <p className={featured ? 'story-summary drop-cap' : 'story-summary'}>{item.summary}</p>
     {item.importance_reason && <div className="story-context"><TrendingUp size={14} /><p>{item.importance_reason}</p></div>}
     {item.keywords?.length > 0 && <div className="story-keywords">{item.keywords.map(kw => <span key={kw}>#{kw}</span>)}</div>}
-    <div className="story-link">{item.url ? <>Read the full story <ArrowUpRight size={14} /></> : 'Source link unavailable'}</div>
+    <div className={`story-link ${item.url ? 'read-button' : ''}`}>{item.url ? <>Read the full story <ArrowUpRight size={14} /></> : 'Source link unavailable'}</div>
   </>
   const className = `editorial-story ${featured ? 'featured-story' : ''}`
   return item.url

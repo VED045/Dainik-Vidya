@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Navbar from './components/Navbar'
+import EveningLamp from './components/EveningLamp'
 import Dashboard from './pages/Dashboard'
 import NewsFeed from './pages/NewsFeed'
 import Trends from './pages/Trends'
@@ -74,7 +75,8 @@ export default function App() {
             dateFilter, setDateFilter, specificDay, setSpecificDay,
             sourceFilter, setSourceFilter, category, setCategory
           }}>
-          <div className="site-shell min-h-screen transition-colors duration-300">
+          <div className={`site-shell min-h-screen transition-colors duration-300 ${dark ? 'evening-edition' : ''}`}>
+          {dark && <EveningLamp />}
           <Router>
             <Navbar />
             <main id="main-content" className="journal-main">

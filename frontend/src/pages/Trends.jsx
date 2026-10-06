@@ -35,12 +35,12 @@ export default function Trends() {
   }
 
   const panel = dark
-    ? 'glass rounded-2xl p-6 animate-fade-in'
-    : 'bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-fade-in'
+    ? 'insights-panel glass rounded-2xl p-6 animate-fade-in'
+    : 'insights-panel bg-white rounded-2xl p-6 border border-slate-200 shadow-sm animate-fade-in'
 
   const statCard = dark
-    ? 'glass rounded-2xl px-5 py-4'
-    : 'bg-white rounded-2xl px-5 py-4 border border-slate-200 shadow-sm'
+    ? 'insight-stat glass rounded-2xl px-5 py-4'
+    : 'insight-stat bg-white rounded-2xl px-5 py-4 border border-slate-200 shadow-sm'
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
@@ -83,7 +83,7 @@ export default function Trends() {
             <h2 className={`font-semibold text-lg mb-3 flex items-center gap-2 ${dark ? 'text-primary-400' : 'text-primary-600'}`}>
               <BarChart3 size={20} /> Today's Overview
             </h2>
-            <p className={`text-sm leading-relaxed ${dark ? 'text-slate-300' : 'text-slate-700'}`}>
+            <p className={`overview-copy text-sm leading-relaxed ${dark ? 'text-slate-300' : 'text-slate-700'}`}>
               {trends.overview}
             </p>
           </div>

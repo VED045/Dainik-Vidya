@@ -173,9 +173,10 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
           )}
           <button
             onClick={toggleBookmark}
-            className={`p-1.5 rounded-lg transition-colors ml-1 ${dark ? 'hover:bg-slate-800' : 'hover:bg-slate-100'}`}
+            className={`bookmark-control p-1.5 rounded-lg transition-colors ml-1 ${dark ? 'hover:bg-slate-800' : 'hover:bg-slate-100'}`}
             title={!auth ? 'Log in to bookmark' : bookmarked ? 'Remove bookmark' : 'Bookmark this article'}
             aria-label={!auth ? 'Log in to bookmark' : bookmarked ? 'Remove bookmark' : 'Bookmark this article'}
+            aria-pressed={bookmarked}
           >
             {bookmarked
               ? <BookmarkCheck size={16} className="text-primary-500" />
@@ -185,7 +186,7 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
       </div>
 
       {/* Title — clickable link (always shows original title) */}
-      <h3 className={`font-semibold text-sm leading-snug line-clamp-2 transition-colors
+      <h3 className={`font-semibold text-sm leading-snug transition-colors
         ${dark ? 'text-slate-100' : 'text-slate-800'}`}>
         <a
           href={article.url}
@@ -215,7 +216,7 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
             <button
               key={kw}
               onClick={() => onKeywordClick?.(kw)}
-              className={`text-xs px-2 py-0.5 rounded-md border transition-colors
+              className={`keyword-control text-xs px-2 py-0.5 rounded-md border transition-colors
                 ${dark
                   ? 'bg-slate-800 text-slate-500 border-slate-700/50 hover:text-primary-400 hover:border-primary-500/40'
                   : 'bg-slate-50 text-slate-400 border-slate-200 hover:text-primary-600 hover:border-primary-300'}`}
@@ -231,7 +232,7 @@ export default function NewsCard({ article, onKeywordClick, bookmarkId: initialB
         href={article.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 text-primary-500 text-xs font-semibold mt-auto hover:text-primary-600 transition-colors w-fit"
+        className="read-button flex items-center gap-1.5 text-primary-500 text-xs font-semibold mt-auto hover:text-primary-600 transition-colors w-fit"
       >
         Read full article <ExternalLink size={12} />
       </a>
